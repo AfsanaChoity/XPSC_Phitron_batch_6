@@ -1,0 +1,3 @@
+himu 2
+nat 7
+bol 9
