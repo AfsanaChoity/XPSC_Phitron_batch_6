@@ -5,55 +5,41 @@ int main()
     int testcase;
     cin >> testcase;
 
-    //int i=0;
+    
     while (testcase--)
     {
-        //i++;
-        //cout<< "Test: "<< i << endl;
-        double n; // the length of the bit strings
+        
+        int n; 
         cin >> n;
         string str_a, str_b;
         cin >> str_a;
         cin >> str_b;
+
+        int num_of_even_idx_1 = 0;
+        int num_of_odd_idx_1 = 0;
+        for (int i = 0; i < str_a.size(); i++)
+        {
+            if (i % 2 == 0 && str_a[i] == '1')
+                num_of_even_idx_1++;
+            else if (i % 2 != 0 && str_a[i] == '1')
+                num_of_odd_idx_1++;
+        }
         
-        vector<char> zig_zag1;
-        vector<char> zig_zag2;
-        for(int i=0; i<n; i+=2)
+        int num_of_even_idx_0 = 0;
+        int num_of_odd_idx_0 = 0;
+        for (int i = 0; i < str_b.size(); i++)
         {
-           zig_zag1.push_back(str_a[i]);
-           zig_zag1.push_back(str_b[i+1]);
-           zig_zag2.push_back(str_b[i]);
-           zig_zag2.push_back(str_a[i+1]);
+            if (i % 2 == 0 && str_b[i] == '0')
+                num_of_even_idx_0++;
+            else if (i % 2 != 0 && str_b[i] == '0')
+                num_of_odd_idx_0++;
         }
-
-        // for(char ch : zig_zag1)
-        //     cout<< ch;
-        // cout<< endl;
-        // for(char ch : zig_zag2)
-        //     cout<< ch;
-        // cout<< endl;
         
-        int num_of_zero_zigzag1= 0;
-        for(char ch : zig_zag1)
-        {
-            if(ch == '0')
-                num_of_zero_zigzag1++;
-        }
-
-        int num_of_zero_zigzag2= 0;
-        for(char ch : zig_zag2)
-        {
-            if(ch == '0')
-                num_of_zero_zigzag2++;
-        }
-
-        //cout<< num_of_zero_zigzag1 << " & "<< num_of_zero_zigzag2<< endl;
-        if(num_of_zero_zigzag1 >= n/2 && num_of_zero_zigzag2 >= n/2)
-            cout<< "YES"<< endl;
+        
+        if (num_of_even_idx_0 >= num_of_odd_idx_1 && num_of_odd_idx_0>= num_of_even_idx_1)
+            cout << "YES" << endl;
         else
-            cout<< "NO"<< endl;
-        
-        
+            cout << "NO" << endl;
     }
     return 0;
 }
