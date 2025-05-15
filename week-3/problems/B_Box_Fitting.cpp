@@ -1,41 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int main() {
+int main()
+{
     int t;
     cin >> t;
-    while(t--) {
+    while (t--)
+    {
         int n, mx_weight;
         cin >> n >> mx_weight;
-
         multiset<int, greater<int>> weights;
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
             int w;
             cin >> w;
             weights.insert(w);
         }
+        int min_height = 1;
+        
 
-        int min_height = 0;
-        while(!weights.empty()) {
-            min_height++;
-            int layer = mx_weight;
-
-            for(auto it = weights.begin(); it != weights.end(); ) {
-                if(layer <= 0)
-                    break;
-
-                if(*it <= layer) {
-                   // cout << *it << " ";
-                    layer -= *it;
-                    it = weights.erase(it); // ✅ safe erase
-                } else {
-                    ++it;
-                }
+        int total_weight = mx_weight;
+        while (!weights.empty())
+        {
+            /* code */
+            auto it = weights.lower_bound(total_weight);
+            if( it != weights.end())
+            {
+                total_weight -= *it;
+                weights.erase(it);
+                
             }
-           // cout << "\n";
+            else
+            {
+                min_height++;
+                total_weight = mx_weight;
+            }
+
         }
+        
+        
 
         cout << min_height << endl;
+        //cout<< endl;
     }
     return 0;
 }
